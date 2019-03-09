@@ -18,6 +18,7 @@ public class FirstServiceProviderApplication {
         new SpringApplicationBuilder(FirstServiceProviderApplication.class)
                 .run(args);
 	}
+	
 
 	@RequestMapping("/message")
 	public String getMsg(HttpServletRequest request) {
