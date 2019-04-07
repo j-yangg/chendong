@@ -20,4 +20,12 @@ public class HelloController {
     private String hello() {
         return helloService.getMsg();
     }
+
+    @Autowired
+    private TestUser testUser;
+
+    @RequestMapping("/testUser")
+    public String testUser() {
+        return testUser.getTestMsg();
+    }
 }
