@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Scanner;
 
 @SpringBootApplication
 @EnableEurekaClient
@@ -15,11 +14,13 @@ import java.util.Scanner;
 public class FirstServiceProviderApplication {
 
 	public static void main(String[] args) {
-        new SpringApplicationBuilder(FirstServiceProviderApplication.class).run(args);
+        new SpringApplicationBuilder(FirstServiceProviderApplication.class)
+                .run(args);
 	}
 
 	@RequestMapping("/message")
-	public String getMsg(HttpServletRequest request) {
-	    return "Test success\n" + request.getRequestURL().toString();
+	public String getMsg() {
+	    return "This is a message from first-service-provider";
     }
+
 }
