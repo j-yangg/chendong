@@ -7,15 +7,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
-@EnableEurekaClient
-@RestController
+//@EnableEurekaClient
+//@RestController
 public class SecondServiceProviderApplication {
 
 	public static void main(String[] args) {
         new SpringApplicationBuilder(SecondServiceProviderApplication.class).run(args);
 	}
 
-	@RequestMapping("/message2")
+	//@RequestMapping("/message2")
 	public String getMsg() {
 		return "This is a message from second-service-provider";
 	}

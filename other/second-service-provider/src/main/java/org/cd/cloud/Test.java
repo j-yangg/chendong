@@ -2,6 +2,8 @@ package org.cd.cloud;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -14,10 +16,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.*;
 
 /**
  * @classname: Test
@@ -25,9 +24,8 @@ import java.util.concurrent.ThreadPoolExecutor;
  * @author: Danny Chen
  * @create: 2019-03-26 21:14
  */
+@RestController
 public class Test {
-
-    static final ExecutorService threadPool = Executors.newFixedThreadPool(10);
 
     public void call() {
         String rssUrl = "https://blog.csdn.net/aharddreamer/rss/list";
@@ -54,6 +52,7 @@ public class Test {
     }
 
     public static void main(String[] args) throws Exception {
+        ExecutorService threadPool = Executors.newFixedThreadPool(10);
         int times = 1;
         for (int i = 0; i < times ; i++) {
             threadPool.execute(new Runnable() {
@@ -66,6 +65,27 @@ public class Test {
             //Thread.sleep(30000);
         }
         threadPool.shutdown();
+    }
+
+    @RequestMapping("/")
+    public String test() throws Exception {
+        ExecutorService threadPool = Executors.newFixedThreadPool(10);
+        int times = 1;
+        final CountDownLatch countDownLatch = new CountDownLatch(times);
+        for (int i = 0; i < times ; i++) {
+            threadPool.execute(new Runnable() {
+                public void run() {
+                    System.out.println("======================Thread Name: "+ Thread.currentThread().getName() +"========================");
+                    Test test = new Test();
+                    test.call();
+                    countDownLatch.countDown();
+                }
+            });
+            //Thread.sleep(30000);
+        }
+        countDownLatch.await();
+        threadPool.shutdown();
+        return "SUCCESS";
     }
 
 
