@@ -1,0 +1,33 @@
+@startuml
+
+abstract class Factory {
+create()
+createProduct()
+registerProduct()
+}
+
+abstract class Product {
+use()
+}
+
+class IDCardFactory {
+owners
+createProduct()
+registerProduct()
+getOwners()
+}
+
+class IDCard {
+owner
+use()
+getOwner()
+}
+
+Factory <|-- IDCardFactory:继承
+Product <|-- IDCard:继承
+
+Product <-- Factory:创建
+IDCard <-- IDCardFactory:创建
+
+
+@enduml
