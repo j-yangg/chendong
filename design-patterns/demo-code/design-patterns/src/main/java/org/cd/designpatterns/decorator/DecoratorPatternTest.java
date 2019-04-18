@@ -1,6 +1,6 @@
 package org.cd.designpatterns.decorator;
 
-import org.cd.designpatterns.FullBorder;
+import org.cd.designpatterns.observer.FullBorder;
 
 /**
  * @classname: DecoratorPatternTest

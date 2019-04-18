@@ -1,4 +1,4 @@
-package org.cd.designpatterns;
+package org.cd.designpatterns.observer;
 
 import org.cd.designpatterns.decorator.Border;
 import org.cd.designpatterns.decorator.Display;
